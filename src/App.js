@@ -20,21 +20,14 @@ function App() {
 */  
   const palkkaMuuttunut=(event) => {
     setBruttopalkka(event.target.value);
-    console.log(bruttopalkka);
-    console.log(event.target.value);
-
-    let vero = event.target.value*veroprosentti/100;
-    setVeromäärä(vero);
   }
   const veroprosMuuttunut=(event) => {
     setVeroprosentti(event.target.value);
-    console.log(veroprosentti);
-
-    let vero = bruttopalkka*event.target.value/100;
-    setVeromäärä(vero);
-
   }
-
+  const laskeVero=() => {
+    let vero = bruttopalkka*veroprosentti/100;
+    return vero;
+  }
 
   // JSX
   return (
@@ -42,7 +35,7 @@ function App() {
     {/*  <button onClick={nappiaPainettu}>Laske veron määrä</button>*/}
       <input onChange={(event)=>palkkaMuuttunut(event)} value={bruttopalkka}></input> eur <br></br>
       <input onChange={(event)=>veroprosMuuttunut(event)} value={veroprosentti}></input> %
-      <p>Veromäärä: <b>{veromäärä}</b></p>
+      <p>Veromäärä: <b>{laskeVero()}</b></p>
     </div>
   );
 }
